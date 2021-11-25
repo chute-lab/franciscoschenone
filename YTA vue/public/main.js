@@ -20,3 +20,6 @@ function myFunction() {
 $("#ocultar").click(function() {
   $("#disparador").hide(1500);
   });
+
+
+

@@ -1,11 +1,26 @@
 <template>
-      
+<div  class="container">
+<div class="row">
+      <div class="col-lg-6 col-lg-4 text-left">
+    <h4 > Queres ver precios por Metro cuadrado por Barrio en CABA? </h4>
+<button class="btn btn-primary" v-on:click= "show = !show"> Ver precios </button>
+</div>
+        <div class="col-lg-6 col-lg-4 text-center">
+          <!-- <button class="btn btn-primary" v-on:click= "show = !show"> Ver precios </button> -->
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d210146.68168877432!2d-58.573383207134555!3d-34.615743688997895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca3b4ef90cbd%3A0xa0b3812e88e88e87!2sBuenos%20Aires%2C%20CABA!5e0!3m2!1ses-419!2sar!4v1637779039249!5m2!1ses-419!2sar"
+           width="500" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+</div>
+          
+</div>
+</div>
+
+
+
     <div class="background">
-      <div class="container">
-
-      <button class="vue.exp">Ocultando</button>
-
-      <h4>Selecciona el barrio para ver precios promedio por mt2</h4>
+        <div v-if= "show" class="container">
+                
+        
+      <h4 id= 'viajando' >Selecciona el barrio para ver precios promedio por mt2</h4>
       
           <table class="table" >
             <thead class="thead-dark">
@@ -47,24 +62,11 @@
           </table>
       </div>
 
-
-
-
-          
-
-      
-  
-  
-
-
-
-
-
-    
         
       </div>
             <!-- </div> -->
-    <h1> Crea tu alerta</h1>
+    <hr>
+    <h1 id= 'viajando'> Crea tu alerta</h1>
   <div id="formulario-persona">
     <form @submit.prevent="enviarFormulario" >
       <div class="container">
@@ -165,14 +167,14 @@
 
     </form>
 
-    <div><button class="btn btn-primary" @click="getAllData" >
+    <!-- <div><button class="btn btn-primary" @click="getAllData" >
       get_barrios by this.axios </button>
-                          </div>
-    <div><button class="btn btn-primary" @click="refreshIframe" >
+                          </div> -->
+    <!-- <div><button class="btn btn-primary" @click="refreshIframe" >
       Probando el link </button>
-                          </div>
+                          </div> -->
                           
-  <div> {{precio_barrios.precio}} </div>
+  <!-- <div> {{precio_barrios.precio}} </div> -->
   <!-- <img  src= "https://http2.mlstatic.com/D_NQ_NP_645547-MLA48195737370_112021-O.webp"> -->
   <!-- <div> {{linktest}} </div> -->
   <!-- <iframe v-if="linktest" src= "{{linktest}}"
@@ -190,6 +192,8 @@ frameborder="0" width="100%" height="800">
 <script>
 
 
+
+
 import axios from 'axios';
 
 export default {
@@ -200,6 +204,10 @@ export default {
       correcto: false,
       error: false,
       linktest:"",
+      show: false,
+      vue: {
+        exp:null,
+      },
       precio_barrios: {
         precio: ""
 
@@ -310,6 +318,7 @@ export default {
             console.log(err) }
 
       },
+      
     
         resetEstado(){
           this.correcto = false;
@@ -317,7 +326,9 @@ export default {
           this.procesando = true;
         },
         
+        
     },
+    
     computed: {
         nombreInvalido() {
       return this.persona.nombre.length < 1;
